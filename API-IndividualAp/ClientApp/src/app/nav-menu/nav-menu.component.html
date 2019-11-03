@@ -1,0 +1,46 @@
+
+<nav class='nav navbar-inverse'>
+
+
+
+
+  <div class='container-fluid'>
+    <div class='nav navbar-nav'>
+      <a class='navbar-brand' [routerLink]='["/"]'>API_IndividualAp</a>
+    </div>
+    <ul class='nav navbar-nav'>
+      <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+        <a [routerLink]='["/"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-home'></span> Home
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]'>
+        <a [routerLink]='["/counter"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-education'></span> Counter
+        </a>
+      </li>
+      <li [routerLinkActive]='["link-active"]'>
+        <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
+          <span class='glyphicon glyphicon-th-list'></span> Fetch data
+        </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li [routerLinkActive]='["link-active"]'>
+        <a [routerLink]='["/cart"]' (click)='collapse()'>Cart</a>
+      </li>
+      <li [routerLinkActive]='["link-active"]'>
+        <a [routerLink]='["/login"]' (click)='collapse()'>Log in</a>
+      </li>
+      <li class="dropdown" appDropdown>
+        <a href="#" class="dropdown-toggle" role="button">Options <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li [routerLinkActive]='["link-active"]'><a [routerLink]='["/settings"]' (click)='collapse()'>Settings</a></li>
+          <li [routerLinkActive]='["link-active"]'><a [routerLink]='["/product-history"]' (click)='collapse()'>Product History</a></li>
+          <li [routerLinkActive]='["link-active"]'><a [routerLink]='["/manage-items"]' (click)='collapse()'>Manage Items</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+

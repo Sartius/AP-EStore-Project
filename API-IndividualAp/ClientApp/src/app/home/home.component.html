@@ -1,0 +1,34 @@
+
+  <nav class="navbar navbar-light bg-light navbar-left">
+    <div class="float-right">
+      <div class="dropdown" appDropdown>
+        <a href="#" class="dropdown-toggle" role="button">Categories <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Food</a></li>
+          <li><a href="#">Cars</a></li>
+          <li><a href="#">Computers</a></li>
+        </ul>
+      </div>
+      <div class="dropdown" appDropdown>
+        <a href="#" class="dropdown-toggle" role="button">Sort by<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Newest</a></li>
+          <li><a href="#">Most Popular</a></li>
+          <li><a href="#">Price</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<nav class="navbar navbar-light bg-light navbar-right">
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<div class="container">
+  <h1>Item List!</h1>
+  <app-item-list></app-item-list>
+</div>
+

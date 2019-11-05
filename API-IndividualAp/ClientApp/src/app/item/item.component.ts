@@ -11,9 +11,14 @@ import { ItemService } from './item.service';
 export class ItemComponent implements OnInit {
   @Input() item: Item;
 
-  constructor() { }
+  constructor(private itemService: ItemService) { }
 
   ngOnInit() {
+
+  }
+
+  onAddToCart() {
+    this.itemService.addItemToCart(this.item)
   }
 
 }

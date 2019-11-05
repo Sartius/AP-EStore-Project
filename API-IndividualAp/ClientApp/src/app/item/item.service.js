@@ -4,7 +4,9 @@ var item_model_1 = require("./item.model");
 var core_1 = require("@angular/core");
 var ItemService = /** @class */ (function () {
     function ItemService() {
-        this.addItem = new core_1.EventEmitter();
+        //addItem = new EventEmitter<Item>();
+        this.itemsChanged = new core_1.EventEmitter();
+        this.array = [];
         this.items = [
             new item_model_1.Item('Car', 'Good Car', 'https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/911-road-3629a.jpg?itok=m6x23Go0', 25),
             new item_model_1.Item('Car', 'Good Car', 'https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/911-road-3629a.jpg?itok=m6x23Go0', 23),
@@ -13,10 +15,19 @@ var ItemService = /** @class */ (function () {
         ];
     }
     ItemService.prototype.getItems = function () {
-        return this.items.slice();
+        console.log("On get Items:");
+        console.log(this.items);
+        console.log("Array:");
+        console.log(this.array);
+        return this.items;
     };
     ItemService.prototype.onAddItems = function (item) {
+        console.log("what is inside the sent item?:");
+        console.log(item);
+        this.array.push(item);
         this.items.push(item);
+        console.log(this.items);
+        this.itemsChanged.emit(this.items.slice());
     };
     return ItemService;
 }());

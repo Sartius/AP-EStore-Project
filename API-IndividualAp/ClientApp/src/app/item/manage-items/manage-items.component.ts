@@ -5,8 +5,7 @@ import { ItemService } from '../item.service';
 @Component({
   selector: 'app-manage-items',
   templateUrl: './manage-items.component.html',
-  styleUrls: ['./manage-items.component.css'],
-  providers: [ItemService]
+  styleUrls: ['./manage-items.component.css']
 })
 export class ManageItemsComponent implements OnInit {
   @Input() item: Item;
@@ -16,7 +15,7 @@ export class ManageItemsComponent implements OnInit {
   @ViewChild('imgPathInput') imgPathInputRef: ElementRef;
   @ViewChild('priceInput') priceInputRef: ElementRef;
 
-  //@Output() itemAdded = new EventEmitter< Item >();
+  @Output() itemAdded = new EventEmitter< Item >();
 
   constructor(private itemService: ItemService) { }
 
@@ -29,8 +28,12 @@ export class ManageItemsComponent implements OnInit {
     const itemImgPath = this.imgPathInputRef.nativeElement.value;
     const itemPrice = this.priceInputRef.nativeElement.value;
     this.item = new Item(itemName, itemDescr, itemImgPath, itemPrice);
-    //this.itemAdded.emit(newItem);
-    this.itemService.addItem.emit(this.item);
+    console.log("The manage items component Item:");
+    console.log(this.item);
+    //this.itemAdded.emit(this.item);
+
+    //this.itemService.addItem.emit(this.item);
+    this.itemService.onAddItems(this.item);
   }
 
 }

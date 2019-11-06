@@ -9,7 +9,9 @@ export class CartService {
     return this.cartItems.slice();
   }
 
-  addItemToCart(item: Item) {
-    this.cartItems.push(item);
+    addItemToCart(item: Item) {
+      console.log("In cart service")
+        this.cartItems.push(item);
+      console.log(this.cartItems)
   }
 }

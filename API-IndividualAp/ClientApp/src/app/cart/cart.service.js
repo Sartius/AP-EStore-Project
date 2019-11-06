@@ -8,7 +8,9 @@ var CartService = /** @class */ (function () {
         return this.cartItems.slice();
     };
     CartService.prototype.addItemToCart = function (item) {
+        console.log("In cart service");
         this.cartItems.push(item);
+        console.log(this.cartItems);
     };
     return CartService;
 }());

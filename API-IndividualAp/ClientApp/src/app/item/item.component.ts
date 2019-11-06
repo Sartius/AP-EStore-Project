@@ -17,8 +17,9 @@ export class ItemComponent implements OnInit {
 
   }
 
-  onAddToCart() {
-    this.itemService.addItemToCart(this.item)
+    onAddToCart() {
+      console.log("U Itemcomponentu dal calla?")
+      this.itemService.addItemToCart(this.item)
   }
 
 }

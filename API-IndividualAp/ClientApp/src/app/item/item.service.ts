@@ -1,5 +1,5 @@
 import { Item } from './item.model';
-import { EventEmitter, Injectable, Component } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 
 @Injectable()
@@ -33,7 +33,9 @@ export class ItemService {
     console.log(this.items);
     this.itemsChanged.emit(this.items.slice());
   }
-  addItemToCart(item: Item) {
+    addItemToCart(item: Item) {
+        console.log("Service.addtocart")
+        console.log(item)
     this.cartService.addItemToCart(item);
   }
 }

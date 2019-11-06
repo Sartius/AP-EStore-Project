@@ -15,7 +15,7 @@ export class ManageItemsComponent implements OnInit {
   @ViewChild('imgPathInput') imgPathInputRef: ElementRef;
   @ViewChild('priceInput') priceInputRef: ElementRef;
 
-  @Output() itemAdded = new EventEmitter< Item >();
+  //@Output() itemAdded = new EventEmitter< Item >();
 
   constructor(private itemService: ItemService) { }
 

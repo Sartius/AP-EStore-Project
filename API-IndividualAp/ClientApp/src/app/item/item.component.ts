@@ -18,7 +18,8 @@ export class ItemComponent implements OnInit {
   }
 
   onAddToCart() {
-    this.itemService.addItemToCart(this.item)
+    console.log("Call on item component for cartservice");
+    this.itemService.addItemToCart(this.item);
   }
 
 }

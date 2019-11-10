@@ -34,6 +34,7 @@ export class ItemService {
     this.itemsChanged.emit(this.items.slice());
   }
   addItemToCart(item: Item) {
+    console.log("Call on itemService to CartService");
     this.cartService.addItemToCart(item);
   }
 }

@@ -14,5 +14,9 @@ namespace API_IndividualAp.Models
         }
 
         public DbSet<UserDtoModel> UserList { get; set; }
+        public DbSet<ItemDtoModel> SmallItemInstance { get; set; }
+        public DbSet<ItemDetailDtoModel> DetailedItemInstance { get; set; }
+        public DbSet<OrderDtoModel> OrderInstance { get; set; }
+        public DbSet<CartDtoModel> CartInstance { get; set; }
     }
 }

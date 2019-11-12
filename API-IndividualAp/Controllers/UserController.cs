@@ -46,5 +46,7 @@ namespace API_IndividualAp.Controllers
 
             return CreatedAtAction("GetSingleUser", new UserDtoModel { Id = user.Id }, user);
         }
+
+        
     }
 }

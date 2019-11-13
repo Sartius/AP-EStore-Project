@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
 	<TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
@@ -14,27 +14,33 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="ClientApp\src\app\NewFolder1\**" />
     <Compile Remove="ClientApp\src\app\NewFolder2\**" />
+    <Compile Remove="Migrations\**" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="ClientApp\src\app\NewFolder1\**" />
     <Content Remove="ClientApp\src\app\NewFolder2\**" />
+    <Content Remove="Migrations\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="ClientApp\src\app\NewFolder1\**" />
     <EmbeddedResource Remove="ClientApp\src\app\NewFolder2\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <None Remove="ClientApp\src\app\NewFolder1\**" />
     <None Remove="ClientApp\src\app\NewFolder2\**" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +49,10 @@
     <None Remove="ClientApp\src\app\item\item.model.ts" />
     <None Remove="ClientApp\src\app\item\item.service.ts" />
     <None Remove="ClientApp\src\app\shared\dropdown.directive.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ES-DTO\ES-DTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>

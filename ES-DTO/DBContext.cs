@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ES_DTO;
 
-namespace API_IndividualAp.Models
+namespace ES_DTO
 {
     public class DBContext : DbContext
     {

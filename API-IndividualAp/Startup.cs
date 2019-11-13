@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using API_IndividualAp.Models;
+
+using ES_DTO;
+using Microsoft.Extensions.Hosting;
 
 namespace API_IndividualAp
 {
@@ -23,7 +25,8 @@ namespace API_IndividualAp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DBContext>(opt => opt.UseSqlServer(Configuration["Data:ESalesAPIConnection:ConnectionString"]));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -32,10 +35,12 @@ namespace API_IndividualAp
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        /* This method gets called by the runtime. Use this method to configure the HTTP request pipeline.Severity	Code	Description	Project	File	Line	Suppression State	Suppression State
+Warning	CS0618	'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'	API-IndividualAp	C:\Users\AP LAB\source\repos\AP-EStore-Project\API-IndividualAp\Startup.cs	37		Active
+*/
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()) //HostingEnvironmentExtensions.IsDevelopment()
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -48,6 +53,7 @@ namespace API_IndividualAp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
 
             app.UseMvc(routes =>
             {

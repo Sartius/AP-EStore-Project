@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Cart] (
-    [id]              INT      NOT NULL,
+    [id]              NUMERIC      NOT NULL,
     [userId]          INT      NOT NULL,
     [DateLastUpdated] DATETIME NULL,
     CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED ([id] ASC),

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using API_IndividualAp.Models;
+using ES_DTO;
 
 namespace API_IndividualAp.Controllers
 {

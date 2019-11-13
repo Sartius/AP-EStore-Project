@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ES-DTO\ES-DTO.csproj" />
+  </ItemGroup>
+
 </Project>

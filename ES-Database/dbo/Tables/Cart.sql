@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Cart] (
-    [id]              NUMERIC      NOT NULL,
+    [id]              INT      IDENTITY (1, 1) NOT NULL,
     [userId]          INT      NOT NULL,
-    [DateLastUpdated] DATETIME NULL,
+    [DateLastUpdated] DATETIME NOT NULL,
     CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_Cart_User] FOREIGN KEY ([userId]) REFERENCES [dbo].[User] ([Id])
 );

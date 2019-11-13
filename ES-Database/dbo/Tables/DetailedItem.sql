@@ -1,14 +1,16 @@
 ﻿CREATE TABLE [dbo].[DetailedItem] (
-    [Id]            INT        NOT NULL,
-    [ProductId]     INT        NOT NULL,
-    [DatePublished] DATETIME   NULL,
-    [Condition]     NCHAR (10) NULL,
-    [Gender]        NCHAR (10) NULL,
-    [Colour]        NCHAR (10) NULL,
-    [Model]         NCHAR (10) NULL,
-    [PublishedBy]   NCHAR (10) NULL,
-    [ShippingFrom]  NCHAR (10) NULL,
+    [Id]            INT            IDENTITY (1, 1) NOT NULL,
+    [CodeId]        INT            NOT NULL,
+    [DatePublished] DATETIME       NOT NULL,
+    [Condition]     INT            NOT NULL,
+    [Gender]        INT            NOT NULL,
+    [Colour]        INT            NOT NULL,
+    [Model]         NVARCHAR (200) NOT NULL,
+    [PublishedBy]   INT            NOT NULL,
+    [ShippingFrom]  VARCHAR (200)  NOT NULL,
     CONSTRAINT [PK_DetailedItem] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_DetailedItem_Item] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Item] ([Id])
+    CONSTRAINT [FK_DetailedItem_ItemVersion] FOREIGN KEY ([CodeId]) REFERENCES [dbo].[ItemVersion] ([Id])
 );
+
+
 

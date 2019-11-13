@@ -36,8 +36,8 @@ namespace API_IndividualAp
         }
 
         /* This method gets called by the runtime. Use this method to configure the HTTP request pipeline.Severity	Code	Description	Project	File	Line	Suppression State	Suppression State
-Warning	CS0618	'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'	API-IndividualAp	C:\Users\AP LAB\source\repos\AP-EStore-Project\API-IndividualAp\Startup.cs	37		Active
-*/
+        Warning	CS0618	'IHostingEnvironment' is obsolete: 'This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.'	API-IndividualAp	C:\Users\AP LAB\source\repos\AP-EStore-Project\API-IndividualAp\Startup.cs	37		Active
+        */
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment()) //HostingEnvironmentExtensions.IsDevelopment()

@@ -70,5 +70,6 @@
     <Build Include="dbo\Tables\DetailedItem.sql" />
     <Build Include="dbo\Tables\Item.sql" />
     <Build Include="dbo\Tables\CartItem.sql" />
+    <Build Include="dbo\Tables\ItemVersion.sql" />
   </ItemGroup>
 </Project>

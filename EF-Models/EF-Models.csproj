@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>ES_DAL</RootNamespace>
+    <RootNamespace>EF_Models</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,11 +17,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EF-Models\EF-Models.csproj" />
-    <ProjectReference Include="..\ES-DbUOW\ES-DbUOW.csproj" />
   </ItemGroup>
 
 </Project>

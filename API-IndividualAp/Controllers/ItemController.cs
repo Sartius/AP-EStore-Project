@@ -13,11 +13,11 @@ namespace API_IndividualAp.Controllers
     public class ItemController : Controller
     { 
 
-         private readonly DBContext _dBContext;
+    /*     private readonly DBContext _dBContext;
     public ItemController(DBContext context)
     {
         _dBContext = context;
-    }
+    }*/ /*
         [HttpGet]
         public ActionResult<IEnumerable<ItemDtoModel>> GetItemSmall()
         {
@@ -46,6 +46,6 @@ namespace API_IndividualAp.Controllers
         
         
 
-
+    */
     }
 }

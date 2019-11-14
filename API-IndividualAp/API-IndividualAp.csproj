@@ -14,7 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="EntityFramework" Version="6.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
 	  <PrivateAssets>all</PrivateAssets>
@@ -52,6 +58,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EF-Models\EF-Models.csproj" />
+    <ProjectReference Include="..\ES-DAL\ES-DAL.csproj" />
     <ProjectReference Include="..\ES-DTO\ES-DTO.csproj" />
   </ItemGroup>
 

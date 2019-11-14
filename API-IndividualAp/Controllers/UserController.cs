@@ -4,49 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ES_DTO;
+using ES_DAL;
 
 namespace API_IndividualAp.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
-        private readonly DBContext _dBContext;
-        public UserController(DBContext context)
+        [HttpGet("{userId}")]
+        public IActionResult Get(int userId, [FromHeader(Name = "MyAuthentication")] string myAuth)
         {
-            _dBContext = context;
+            //return Ok($"USER userId={userId}, a={a}, b={b}" +
+            //    Environment.NewLine + $"myAuth={myAuth}");
+
+            UserDtoModel user = UserManager.GetUser(userId);
+            return Ok(user);
         }
 
-        //GET:      api/user
-        [HttpGet]
-        public ActionResult<IEnumerable<UserDtoModel>> GetUsers()
-        {
-            return _dBContext.UserList;
-        }
-
-        //GET:     api/user/n
-        [HttpGet("{id}")]
-        public ActionResult<UserDtoModel> GetSingleUser(int id)
-        {
-            var singleUser = _dBContext.UserList.Find(id);
-            if (singleUser == null)
-            {
-                return NotFound();
-            }
-            else
-                return singleUser;
-        }
-
-        //POST:    api/user
-        [HttpPost]
-        public ActionResult<UserDtoModel> PostSingleUser(UserDtoModel user)
-        {
-            Console.WriteLine(user);
-            _dBContext.UserList.Add(user);
-            _dBContext.SaveChanges();
-
-            return CreatedAtAction("GetSingleUser", new UserDtoModel { Id = user.Id }, user);
-        }
-
-        
     }
 }

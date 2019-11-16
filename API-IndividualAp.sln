@@ -15,9 +15,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ES-Database", "ES-Database\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EF-Models", "EF-Models\EF-Models.csproj", "{CFEE9B51-7FD3-4B4A-8DA0-E98444F58869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES-DbUOW", "ES-DbUOW\ES-DbUOW.csproj", "{6A01EF30-4319-4F30-B213-D6727C13988F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES-DbUOW", "ES-DbUOW\ES-DbUOW.csproj", "{6A01EF30-4319-4F30-B213-D6727C13988F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES-Repositories", "ES-Repositories\ES-Repositories.csproj", "{0016F45A-F8A0-4ACA-8CE6-A24CBC97648D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ES-Repositories", "ES-Repositories\ES-Repositories.csproj", "{0016F45A-F8A0-4ACA-8CE6-A24CBC97648D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES-Mapper", "ES-Mapper\ES-Mapper.csproj", "{0A3DDBBE-9259-4B91-9D32-EAD8AC7ECB7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{0016F45A-F8A0-4ACA-8CE6-A24CBC97648D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0016F45A-F8A0-4ACA-8CE6-A24CBC97648D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0016F45A-F8A0-4ACA-8CE6-A24CBC97648D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3DDBBE-9259-4B91-9D32-EAD8AC7ECB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3DDBBE-9259-4B91-9D32-EAD8AC7ECB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3DDBBE-9259-4B91-9D32-EAD8AC7ECB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3DDBBE-9259-4B91-9D32-EAD8AC7ECB7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

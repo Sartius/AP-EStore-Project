@@ -15,6 +15,7 @@ namespace ES_Repositories
 
         public override User GetById(object id)
         {
+            //try catch for db_connection
             return _dbSet.SingleOrDefault(u => u.Id == (int)id);
         }
 

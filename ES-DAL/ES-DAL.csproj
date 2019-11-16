@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EF-Models\EF-Models.csproj" />
     <ProjectReference Include="..\ES-DbUOW\ES-DbUOW.csproj" />
+    <ProjectReference Include="..\ES-Mapper\ES-Mapper.csproj" />
   </ItemGroup>
 
 </Project>

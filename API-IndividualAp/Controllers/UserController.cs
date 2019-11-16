@@ -12,13 +12,22 @@ namespace API_IndividualAp.Controllers
     [ApiController]
     public class UserController : Controller
     {
+        IUserManager _userManager;
+        public UserController(IUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
         [HttpGet("{userId}")]
         public IActionResult Get(int userId, [FromHeader(Name = "MyAuthentication")] string myAuth)
         {
-            //return Ok($"USER userId={userId}, a={a}, b={b}" +
-            //    Environment.NewLine + $"myAuth={myAuth}");
 
-            UserDtoModel user = UserManager.GetUser(userId);
+            UserDtoModel user = _userManager.GetUser(userId);
+            
+            if(user == null)
+            {
+                return NotFound();
+            }
             return Ok(user);
         }
 

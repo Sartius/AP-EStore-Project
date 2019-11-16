@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>ES_DbUOW</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EF-Models\EF-Models.csproj" />
+    <ProjectReference Include="..\ES-Repositories\ES-Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

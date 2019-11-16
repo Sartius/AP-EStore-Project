@@ -4,49 +4,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ES_DTO;
+using ES_DAL;
 
 namespace API_IndividualAp.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
-        private readonly DBContext _dBContext;
-        public UserController(DBContext context)
+        IUserManager _userManager;
+        public UserController(IUserManager userManager)
         {
-            _dBContext = context;
+            _userManager = userManager;
         }
 
-        //GET:      api/user
-        [HttpGet]
-        public ActionResult<IEnumerable<UserDtoModel>> GetUsers()
+        [HttpGet("{userId}")]
+        public IActionResult Get(int userId, [FromHeader(Name = "MyAuthentication")] string myAuth)
         {
-            return _dBContext.UserList;
-        }
 
-        //GET:     api/user/n
-        [HttpGet("{id}")]
-        public ActionResult<UserDtoModel> GetSingleUser(int id)
-        {
-            var singleUser = _dBContext.UserList.Find(id);
-            if (singleUser == null)
+            UserDtoModel user = _userManager.GetUser(userId);
+            
+            if(user == null)
             {
                 return NotFound();
             }
-            else
-                return singleUser;
+            return Ok(user);
         }
 
-        //POST:    api/user
-        [HttpPost]
-        public ActionResult<UserDtoModel> PostSingleUser(UserDtoModel user)
-        {
-            Console.WriteLine(user);
-            _dBContext.UserList.Add(user);
-            _dBContext.SaveChanges();
-
-            return CreatedAtAction("GetSingleUser", new UserDtoModel { Id = user.Id }, user);
-        }
-
-        
     }
 }

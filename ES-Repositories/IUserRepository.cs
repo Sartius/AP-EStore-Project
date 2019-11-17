@@ -9,5 +9,7 @@ namespace ES_Repositories
     {
         User GetById(object id);
         User GetByUsernameAndPassword(string username, string passwordHash);
+        void AddNewUser(User user);
+        bool CheckIfUsernameExists(string username);
     }
 }

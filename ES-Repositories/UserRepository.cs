@@ -23,5 +23,20 @@ namespace ES_Repositories
         {
             return _dbSet.SingleOrDefault(u => u.Username == username && u.Password == passwordHash);
         }
+        public void AddNewUser(User user)
+        {
+            if(user == null)
+            {
+                throw new ArgumentNullException("Missing user info");
+            }
+            _dbSet.Add(user);  
+        }
+        public bool CheckIfUsernameExists(string username)
+        {
+            return _dbSet.Any(u => u.Username == username);
+        }
+        //public bool CheckIfEmailExists( string )
+
+        //DeleteUserById()
     }
 }

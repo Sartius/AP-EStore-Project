@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using EF_Models;
 using ES_Repositories;
+using ES_Repositories.CartRepository;
+using ES_Repositories.OrderRepository;
+using ES_Repositories.ProductRepository;
 
 namespace ES_DbUOW
 {
@@ -10,6 +13,9 @@ namespace ES_DbUOW
     {
         private readonly ESDatabaseContext _context;
         private UserRepository _users;
+        private ItemRepository _items;
+        private OrderRepository _orders;
+        private CartRepository _carts;
         public UnitOfWork(ESDatabaseContext context)
         {
             if (context == null)
@@ -31,6 +37,39 @@ namespace ES_DbUOW
                     _users = new UserRepository(_context);
                 }
                 return _users;
+            }
+        }
+        public IItemRepository Products
+        {
+            get
+            {
+                if(_items == null)
+                {
+                    _items = new ItemRepository(_context);
+                }
+                return _items;
+            }
+        }
+        public IOrderRepository Orders
+        {
+            get
+            {
+                if (_orders == null)
+                {
+                    _orders = new OrderRepository(_context);
+                }
+                return _orders;
+            }
+        }
+        public ICartRepository Carts
+        {
+            get
+            {
+                if (_carts == null)
+                {
+                    _carts = new CartRepository(_context);
+                }
+                return _carts;
             }
         }
 

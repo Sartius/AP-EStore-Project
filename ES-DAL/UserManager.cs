@@ -27,7 +27,7 @@ namespace ES_DAL
                 User efUser = uow.Users.GetByUsernameAndPassword(username, passwordHash);
                 if (efUser is null)
                 {
-                    return null;
+                    throw new Exception("Wrong username or password");
                 }
 
 
@@ -53,6 +53,37 @@ namespace ES_DAL
                 UserDtoModel user = _mapper.Map<UserDtoModel>(efUser);
 
                 return user;
+            }
+        }
+
+        public int RegisterUser(UserDtoModel userDto,DateTime cartDate)
+        {
+            if (userDto == null)
+            {
+                throw new ArgumentNullException("User info not supplied");
+            }
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                User efUser = _mapper.Map<User>(userDto);
+                uow.Users.AddNewUser(efUser);
+
+                Cart efCart = new Cart()
+                {
+                    DateLastUpdated = cartDate
+                };
+                efUser.Cart.Add(efCart);
+                uow.Commit();
+                int userID = efUser.Id;
+                return userID;
+            }
+        }
+        public bool CheckIfUsernameExists(string username)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                return uow.Users.CheckIfUsernameExists(username);
             }
         }
 

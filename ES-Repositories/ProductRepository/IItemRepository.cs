@@ -9,5 +9,7 @@ namespace ES_Repositories.ProductRepository
     {
         public Item GetById(object id);
         public Item GetItemByCode(int code);
+        public List<Item> GetItemsBySearch(int category, int sortBy, string searchName);
+        public void AddNewItem(Item item);
     }
 }

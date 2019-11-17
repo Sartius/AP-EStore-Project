@@ -20,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CartLogic\" />
-    <Folder Include="ProductLogic\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ES-DAL\ES-DAL.csproj" />
   </ItemGroup>
 

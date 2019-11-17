@@ -27,7 +27,6 @@ namespace ES_DbUOW
         #region IUnitOfWork Members
 
 
-        //public IRepository<User> Users
         public IUserRepository Users
         {
             get
@@ -39,7 +38,7 @@ namespace ES_DbUOW
                 return _users;
             }
         }
-        public IItemRepository Products
+        public IItemRepository Items
         {
             get
             {

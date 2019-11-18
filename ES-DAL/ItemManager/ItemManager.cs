@@ -57,5 +57,13 @@ namespace ES_DAL.ItemManager
                 return itemID;
             }
         }
+        public void DeleteItem(int itemId)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                uow.Items.DeleteItem(itemId);
+            }
+        }
     }
 }

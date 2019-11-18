@@ -8,6 +8,7 @@ namespace ES_Repositories.OrderRepository
     public interface IOrderRepository
     {
         public Order GetById(object id);
-        
+
+        public List<Order> GetAllOrdersByUserId(int userId);
     }
 }

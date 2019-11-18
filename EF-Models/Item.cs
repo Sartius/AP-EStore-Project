@@ -13,7 +13,7 @@ namespace EF_Models
 
         public int Id { get; set; }
         public int Code { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string Name { get; set; }
         public string ImgPath { get; set; }
         public string ShortDescription { get; set; }

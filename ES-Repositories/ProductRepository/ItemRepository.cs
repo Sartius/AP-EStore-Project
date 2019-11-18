@@ -34,5 +34,24 @@ namespace ES_Repositories.ProductRepository
             _dbSet.Add(item);
             
         }
+        public bool DeleteItem(int itemId)
+        { 
+            if(!CheckIfItemExists(itemId)) 
+                {
+                _dbSet.Where(c => c.Id == itemId && c.IsActive).ToList().Select(c => c.IsActive = false);
+                }
+            return false;
+        }
+
+        public bool CheckIfItemExists(int itemId)
+        {
+            return _dbSet.Any(u => u.Id == itemId);
+        }
+
+        public IEnumerable<Item> GetOrderItems(IEnumerable<int> idList)
+        {
+               
+        }
+
     }
 }

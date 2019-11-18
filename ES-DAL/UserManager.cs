@@ -62,11 +62,17 @@ namespace ES_DAL
             {
                 throw new ArgumentNullException("User info not supplied");
             }
+
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
                 UnitOfWork uow = new UnitOfWork(context);
                 User efUser = _mapper.Map<User>(userDto);
                 uow.Users.AddNewUser(efUser);
+
+                DateTime SetDateTime()
+                {
+                    return DateTime.Now;
+                }
 
                 Cart efCart = new Cart()
                 {

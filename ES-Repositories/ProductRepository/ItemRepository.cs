@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using EF_Models;
 using System.Linq;
+using System.Data.Entity;
+
 
 namespace ES_Repositories.ProductRepository
 {
@@ -21,9 +23,14 @@ namespace ES_Repositories.ProductRepository
         {
             return _dbSet.SingleOrDefault(u => u.Code == code && u.IsActive == true);
         }
+        public IEnumerable<Item> GetItemsByCodes(IEnumerable<int> codes)
+        {
+            //return _dbSet.Where(u => u.Code == codes && u.IsActive == true);
+            return _dbSet.Where(u => codes.Contains(u.Code));
+        }
         public List<Item> GetItemsBySearch(int category, int sortBy,string searchName)
         {
-            return _dbSet.Where(u => u.Name.Contains(searchName)).OrderBy(u => u.Price).ToList(); //figure out how to fix categories and sortby
+            return _dbSet.Where(u => u.Name.Contains(searchName) /*&& u.category == category*/).OrderBy(u => u.Price).ToList(); //figure out how to fix categories and sortby
         }
         public void AddNewItem(Item item)
         {
@@ -46,12 +53,9 @@ namespace ES_Repositories.ProductRepository
         public bool CheckIfItemExists(int itemId)
         {
             return _dbSet.Any(u => u.Id == itemId);
+            
         }
 
-        public IEnumerable<Item> GetOrderItems(IEnumerable<int> idList)
-        {
-               
-        }
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using EF_Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ES_Repositories.OrderRepository
 {
@@ -21,14 +22,16 @@ namespace ES_Repositories.OrderRepository
         {
             return _dbSet.Where(u => u.UserId == userID).OrderBy(u => u.Date).ToList();
         }
-        public IEnumerable<OrderItem> GetAllOrderItemsByOrderId(int orderId )
+        public List<Tuple<OrderItem,Item>> GetAllOrderItemsWithItemsByOrderId(int orderId )
         {
-            var order = _dbSet.Single(u => u.Id == orderId);
-            //var orderitems = _dbSet(order => order.).AsEnumerable();
-            return order.OrderItem;
-            //return orderitems.AsEnumerable();
-            //var query = _dbSet.All(u => u.OrderItem == orderItems).Join()
-            //return query.ToList();
+            var order = _dbSet.Include(x => x.OrderItem).Where(u => u.Id == orderId).SingleOrDefault().OrderItem;
+            var orderItem = order.Select(x => x.Product);
+            List<Tuple<OrderItem,Item>> innerFinal = (from l in order
+                              join r in order.Select(x => x.Product)
+                              on l.ProductId equals r.Code
+                              select new Tuple<OrderItem, Item>(l,r)).ToList();
+            
+            return innerFinal;
         }
         //public something list(list) GetOrdersWithItems(userid)
     }

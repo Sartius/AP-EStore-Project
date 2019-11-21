@@ -69,10 +69,6 @@ namespace ES_DAL
                 User efUser = _mapper.Map<User>(userDto);
                 uow.Users.AddNewUser(efUser);
 
-                DateTime SetDateTime()
-                {
-                    return DateTime.Now;
-                }
 
                 Cart efCart = new Cart()
                 {

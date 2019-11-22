@@ -11,5 +11,7 @@ namespace ES_Repositories
         User GetByUsernameAndPassword(string username, string passwordHash);
         void AddNewUser(User user);
         bool CheckIfUsernameExists(string username);
+        public IEnumerable<CartItem> GetCartItems(int userId);
+        public int GetCartId(int userId);
     }
 }

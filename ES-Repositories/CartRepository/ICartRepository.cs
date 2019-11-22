@@ -8,5 +8,6 @@ namespace ES_Repositories.CartRepository
     public interface ICartRepository
     {
         public Cart GetById(object id);
+        public List<Tuple<CartItem, Item>> GetCartItemsWithItems(int cartId);
     }
 }

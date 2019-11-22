@@ -88,6 +88,14 @@ namespace ES_DAL
                 return uow.Users.CheckIfUsernameExists(username);
             }
         }
-
+        public List<Tuple<CartItem,Item>> GetCartItemsWIthItems(int userId)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                
+                return uow.Carts.GetCartItemsWithItems(uow.Users.GetCartId(userId));
+            }
+        }
     }
 }

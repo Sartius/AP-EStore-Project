@@ -6,5 +6,6 @@ namespace ES_DAL.OrderManager
 {
     class OrderManager
     {
+        public void OnCheckout()
     }
 }

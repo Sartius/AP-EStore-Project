@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using EF_Models;
@@ -34,6 +35,18 @@ namespace ES_Repositories
         public bool CheckIfUsernameExists(string username)
         {
             return _dbSet.Any(u => u.Username == username);
+        }
+        public IEnumerable<CartItem> GetCartItems(int userId) //Useless Prolly
+        {
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.AsEnumerable(); 
+        }
+        public int GetCartId(int userId)
+        {
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().Id;
+        }
+        public Item AddItemToCart(int userId, Item item)
+        {
+            //Skontat kako sta 
         }
         //public bool CheckIfEmailExists( string )
 

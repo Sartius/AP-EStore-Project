@@ -16,23 +16,24 @@ namespace ES_Repositories.CartRepository
         public CartRepository(ESDatabaseContext context)
         : base(context)
         {
+
         }
         public override Cart GetById(object id)
         {
             //try catch for db_connection
             return _dbSet.SingleOrDefault(u => u.Id == (int)id);
         }
-        public List<Tuple<CartItem, Item>> GetAllCartItemsWithItemsByCartId(int cartId)
+        public List<Tuple<CartItem,Item>> GetCartItemsWithItems(int cartId)
         {
-            var cartItem = _dbSet.Include(x => x.CartItem).Where(u => u.Id == cartId).SingleOrDefault().CartItem;
-            var itemcodes = cartItem.Select(x => x.ProductCode);
-            var bb = 
-            List<Tuple<CartItem, Item>> innerFinal = (from l in cartItem
-                                                       join r in _dbSet.Where()
-                                                       on l.ProductId equals r.Code
-                                                       select new Tuple<OrderItem, Item>(l, r)).ToList();
+            var cartItem = _dbSet.Where(u => u.Id == cartId).Single().CartItem.AsEnumerable();
+            ESDatabaseContext context = new ESDatabaseContext();
+            var items = context.Item.Where(u => cartItem.Select(c => c.ProductCode).Contains(u.Code)).AsEnumerable();
 
-            return innerFinal;
+            return (from l in cartItem
+                    join r in items
+                    on l.ProductCode equals r.Code
+                    select new Tuple<CartItem, Item>(l, r)).ToList();
         }
+
     }
 }

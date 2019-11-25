@@ -8,12 +8,8 @@ namespace ES_DTO
     public class ItemDtoModel
     {
         public int Id { get; set; }
-        public string Version { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImgPath { get; set; }
-        public double Price { get; set; }
-        public int Amount { get; set; }
-        public double ShippingPrice { get; set; }
+        public bool IsActive { get; set; }
+        public int ItemCategory { get; set; }
+        public int Quantity { get; set; }
     }
 }

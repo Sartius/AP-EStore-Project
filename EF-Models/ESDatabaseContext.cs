@@ -19,6 +19,7 @@ namespace EF_Models
         public virtual DbSet<CartItem> CartItem { get; set; }
         public virtual DbSet<DetailedItem> DetailedItem { get; set; }
         public virtual DbSet<Item> Item { get; set; }
+        public virtual DbSet<ItemVersion> ItemVersion { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -28,7 +29,7 @@ namespace EF_Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=.;Database=ESSalesApi;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-4MEJ0GI;Database=ESSalesApi;Trusted_Connection=True;");
             }
         }
 
@@ -36,9 +37,7 @@ namespace EF_Models
         {
             modelBuilder.Entity<Cart>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateLastUpdated).HasColumnType("datetime");
 
@@ -53,70 +52,74 @@ namespace EF_Models
 
             modelBuilder.Entity<CartItem>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Cart)
                     .WithMany(p => p.CartItem)
                     .HasForeignKey(d => d.CartId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CartItem_Cart");
+
+                entity.HasOne(d => d.ProductCodeNavigation)
+                    .WithMany(p => p.CartItem)
+                    .HasForeignKey(d => d.ProductCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CartItem_ItemVersion");
             });
 
             modelBuilder.Entity<DetailedItem>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Colour)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.Condition)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
                 entity.Property(e => e.DatePublished).HasColumnType("datetime");
 
-                entity.Property(e => e.Gender)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
                 entity.Property(e => e.Model)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.PublishedBy)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.ShippingFrom)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.Product)
+                entity.HasOne(d => d.Code)
                     .WithMany(p => p.DetailedItem)
-                    .HasForeignKey(d => d.ProductId)
+                    .HasForeignKey(d => d.CodeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DetailedItem_Item");
+                    .HasConstraintName("FK_DetailedItem_ItemVersion");
             });
 
             modelBuilder.Entity<Item>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<ItemVersion>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.ImgPath)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ItemId).HasColumnName("itemId");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.ShippingPrice).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.ShortDescription)
-                    .HasMaxLength(100)
-                    .IsFixedLength();
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Item)
+                    .WithMany(p => p.ItemVersion)
+                    .HasForeignKey(d => d.ItemId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ItemVersion_Item");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -136,8 +139,6 @@ namespace EF_Models
 
             modelBuilder.Entity<OrderItem>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderItem)
                     .HasForeignKey(d => d.OrderId)
@@ -148,7 +149,20 @@ namespace EF_Models
                     .WithMany(p => p.OrderItem)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderItem_Item");
+                    .HasConstraintName("FK_OrderItem_ItemVersion");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -22,16 +22,21 @@ namespace ES_Repositories.OrderRepository
         {
             return _dbSet.Where(u => u.UserId == userID).OrderBy(u => u.Date).ToList();
         }
-        public List<Tuple<OrderItem,Item>> GetAllOrderItemsWithItemsByOrderId(int orderId )
+        public List<Tuple<OrderItem,ItemVersion>> GetAllOrderItemsWithItemsByOrderId(int orderId )
         {
             var order = _dbSet.Include(x => x.OrderItem).Where(u => u.Id == orderId).SingleOrDefault().OrderItem;
             var orderItem = order.Select(x => x.Product);
-            List<Tuple<OrderItem,Item>> innerFinal = (from l in order
+            List<Tuple<OrderItem,ItemVersion>> innerFinal = (from l in order
                               join r in order.Select(x => x.Product)
-                              on l.ProductId equals r.Code
-                              select new Tuple<OrderItem, Item>(l,r)).ToList();
+                              on l.ProductId equals r.Id
+                              select new Tuple<OrderItem, ItemVersion>(l,r)).ToList();
             
             return innerFinal;
+        }
+
+        public bool AddOrder()
+        {
+
         }
         //public something list(list) GetOrdersWithItems(userid)
     }

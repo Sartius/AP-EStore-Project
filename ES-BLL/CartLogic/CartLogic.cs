@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using ES_DTO;
+using ES_BLL.Interfaces;
 
 namespace ES_BLL.CartLogic
 {
-    public class CartLogic : ICartLogic
+    public class CartLogic : ICartLogic 
+    { 
+    private readonly ICurrentTime _currentTime;
+    public CartLogic(ICurrentTime currentTime)
     {
-        public DateTime SetDateTime()
-        {
-            return DateTime.Now;
-        }
+        _currentTime = currentTime;
     }
+
+    public DateTime CurrentUTCTime()
+    {
+        return _currentTime.CurrentUTCTime();
+    }
+}
 }

@@ -23,16 +23,20 @@ namespace ES_Repositories.CartRepository
             //try catch for db_connection
             return _dbSet.SingleOrDefault(u => u.Id == (int)id);
         }
-        public List<Tuple<CartItem,Item>> GetCartItemsWithItems(int cartId)
+        public List<Tuple<CartItem,ItemVersion>> GetCartItemsWithItems(int cartId)
         {
             var cartItem = _dbSet.Where(u => u.Id == cartId).Single().CartItem.AsEnumerable();
             ESDatabaseContext context = new ESDatabaseContext();
-            var items = context.Item.Where(u => cartItem.Select(c => c.ProductCode).Contains(u.Code)).AsEnumerable();
+            var items = context.ItemVersion.Where(u => cartItem.Select(c => c.ProductCode).Contains(u.Id)).AsEnumerable();
 
             return (from l in cartItem
                     join r in items
-                    on l.ProductCode equals r.Code
-                    select new Tuple<CartItem, Item>(l, r)).ToList();
+                    on l.ProductCode equals r.Id
+                    select new Tuple<CartItem, ItemVersion>(l, r)).ToList();
+        }
+        public void UpdateDate(int userId,DateTime dateTime)
+        {
+            _dbSet.Where(u => u.UserId == userId).SingleOrDefault().DateLastUpdated = dateTime;
         }
 
     }

@@ -7,7 +7,7 @@ namespace ES_DAL.ItemManager
 {
     public interface IItemManager
     {
-        public List<ItemDtoModel> SearchItems(int category, int sortBy, string searchName);
-        public int AddNewItem(ItemDtoModel item, ItemDetailDtoModel itemDetail);
+        public List<ItemDtoModel> SearchItems(int category, int sortBy, string searchName,int page);
+        public int AddNewItem(ItemDtoModel dto_item, ItemDetailDtoModel dto_itemDetail, ItemVersionDtoModel dto_itemVersion);
     }
 }

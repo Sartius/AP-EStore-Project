@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ES_BLL.UserLogic
+namespace ES_BLL.Interfaces
 {
-    interface IUserLogic
+    public interface IUserLogic
     {
         public bool CheckIfUserExists(string username);
     }

@@ -7,20 +7,14 @@ namespace EF_Models
     {
         public Item()
         {
-            DetailedItem = new HashSet<DetailedItem>();
-            OrderItem = new HashSet<OrderItem>();
+            ItemVersion = new HashSet<ItemVersion>();
         }
 
         public int Id { get; set; }
-        public int Code { get; set; }
         public bool IsActive { get; set; }
-        public string Name { get; set; }
-        public string ImgPath { get; set; }
-        public string ShortDescription { get; set; }
-        public decimal? Price { get; set; }
-        public decimal? ShippingPrice { get; set; }
+        public int ItemCategory { get; set; }
+        public int Quantity { get; set; }
 
-        public virtual ICollection<DetailedItem> DetailedItem { get; set; }
-        public virtual ICollection<OrderItem> OrderItem { get; set; }
+        public virtual ICollection<ItemVersion> ItemVersion { get; set; }
     }
 }

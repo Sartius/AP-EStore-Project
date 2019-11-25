@@ -8,31 +8,41 @@ using System.Data.Entity;
 
 namespace ES_Repositories.ProductRepository
 {
-    public class ItemRepository : Repository<Item>, IItemRepository
+    public class ItemRepository : Repository<ItemVersion>, IItemRepository 
     {
         public ItemRepository(ESDatabaseContext context)
             : base(context)
         {
         }
-        public override Item GetById(object id)
+        public override ItemVersion GetById(object id)
         {
             //try catch for db_connection
             return _dbSet.SingleOrDefault(u => u.Id == (int)id);
         }
-        public Item GetItemByCode(int code)
+        public ItemVersion GetItemByIsActive(int itemId)
         {
-            return _dbSet.SingleOrDefault(u => u.Code == code && u.IsActive == true);
+            return _dbSet.SingleOrDefault(u => u.Item.IsActive == true && u.Id == itemId);
         }
-        public IEnumerable<Item> GetItemsByCodes(IEnumerable<int> codes)
+        public IEnumerable<ItemVersion> GetItemsByCodes(IEnumerable<int> codes)
         {
             //return _dbSet.Where(u => u.Code == codes && u.IsActive == true);
-            return _dbSet.Where(u => codes.Contains(u.Code));
+            return _dbSet.Where(u => codes.Contains(u.Id));
         }
-        public List<Item> GetItemsBySearch(int category, int sortBy,string searchName)
+        public List<ItemVersion> GetItemsBySearch(int category, int sortBy, int filter, string searchName, int page)
         {
+            List<ItemVersion> sh;
+            if (category != 0) 
+            {
+                sh = _dbSet.Where(u => u.Item.ItemCategory == category).ToList();
+            }
+            if(sortBy != 0)
+            {
+                sh.GroupBy(u => u.DetailedItem.Single().)
+            }
             return _dbSet.Where(u => u.Name.Contains(searchName) /*&& u.category == category*/).OrderBy(u => u.Price).ToList(); //figure out how to fix categories and sortby
+            
         }
-        public void AddNewItem(Item item)
+        public void AddNewItem(ItemVersion item)
         {
             if (item == null)
             {
@@ -45,7 +55,7 @@ namespace ES_Repositories.ProductRepository
         { 
             if(!CheckIfItemExists(itemId)) 
                 {
-                _dbSet.Where(c => c.Id == itemId && c.IsActive).ToList().Select(c => c.IsActive = false);
+                _dbSet.Where(c => c.Id == itemId).SingleOrDefault().Item.IsActive = false;
                 }
             return false;
         }
@@ -55,6 +65,12 @@ namespace ES_Repositories.ProductRepository
             return _dbSet.Any(u => u.Id == itemId);
             
         }
+        public bool CheckIfItemIsActive(int itemId)
+        {
+            return _dbSet.Any(u => u.Id == itemId && u.Item.IsActive == true);
+
+        }
+
 
 
     }

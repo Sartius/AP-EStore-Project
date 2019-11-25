@@ -23,6 +23,8 @@ namespace ES_Mapper
 
             CreateMap<Item, ItemDtoModel>().ReverseMap();
 
+            CreateMap<ItemVersion, ItemVersionDtoModel>().ReverseMap();
+
             CreateMap<DetailedItem, ItemDetailDtoModel>().ReverseMap();
         }
     }

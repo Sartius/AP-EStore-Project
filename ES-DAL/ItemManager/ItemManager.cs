@@ -15,20 +15,22 @@ namespace ES_DAL.ItemManager
         {
             mapper = _mapper;
         }
-        public List<ItemDtoModel> SearchItems(int category, int sortBy, string searchName)
+        public List<ItemDtoModel> SearchItems(int category, int sortBy, int filter, string searchName,int page)
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
+                
                 UnitOfWork uow = new UnitOfWork(context);
-                List<ItemDtoModel> items = new List<ItemDtoModel>();
+                //List<ItemVersionDtoModel> items = new List<ItemDtoModel>();
 
-                List<EF_Models.Item> efUsers = uow.Items.GetItemsBySearch(category, sortBy, searchName);
+                List<ItemVersion> efUsers = uow.Items.GetItemsBySearch(category, sortBy, searchName);
                 if (efUsers is null)
                 {
                     return null;
                 }
+                
                     
-                foreach (Item efuser in efUsers)
+                foreach (ItemVersion efuser in efUsers)
                 {
                     items.Add(_mapper.Map<ItemDtoModel>(efuser));
 
@@ -38,19 +40,21 @@ namespace ES_DAL.ItemManager
                 return items;
             }
         }
-        public int AddNewItem(ItemDtoModel item, ItemDetailDtoModel itemDetail)
+        public int AddNewItem(ItemDtoModel dto_item, ItemDetailDtoModel dto_itemDetail, ItemVersionDtoModel dto_itemVersion) //dodat ItemVersionDtoModel
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
                 UnitOfWork uow = new UnitOfWork(context);
-                if(item == null || itemDetail == null)
+                if(dto_item == null || dto_itemDetail == null || dto_itemVersion == null)
                 {
                     throw new ArgumentNullException();
                 }
-                Item efItem = _mapper.Map<Item>(item);
-                DetailedItem efDetailedItem = _mapper.Map<DetailedItem>(itemDetail);
-                uow.Items.AddNewItem(efItem);
-                efItem.DetailedItem.Add(efDetailedItem);
+                ItemVersion efItemVersion = _mapper.Map<ItemVersion>(dto_itemVersion);
+                Item efItem = _mapper.Map<Item>(dto_item);
+                DetailedItem efDetailedItem = _mapper.Map<DetailedItem>(dto_itemDetail);
+                uow.Items.AddNewItem(efItemVersion);
+                efItemVersion.Items.Add(efItem);
+                efItemVersion.DetailedItem.Add(efDetailedItem);
                 uow.Commit();
 
                 int itemID = efItem.Id;

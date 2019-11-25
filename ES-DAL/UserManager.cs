@@ -56,7 +56,7 @@ namespace ES_DAL
             }
         }
 
-        public int RegisterUser(UserDtoModel userDto,DateTime cartDate)
+        public int RegisterUser(UserDtoModel userDto, DateTime cartDate)
         {
             if (userDto == null)
             {
@@ -88,14 +88,85 @@ namespace ES_DAL
                 return uow.Users.CheckIfUsernameExists(username);
             }
         }
-        public List<Tuple<CartItem,Item>> GetCartItemsWIthItems(int userId)
+        public List<Tuple<CartItemsDtoModel, ItemVersionDtoModel>> GetCartItemsWIthItems(int userId)
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
                 UnitOfWork uow = new UnitOfWork(context);
-                
-                return uow.Carts.GetCartItemsWithItems(uow.Users.GetCartId(userId));
+                List<Tuple<CartItem, ItemVersion>> cartItemWithItems =
+                    uow.Carts.GetCartItemsWithItems(uow.Users.GetCartId(userId));
+
+                List<CartItemsDtoModel> cartItemDto =
+                    _mapper.Map<List<CartItemsDtoModel>>
+                    (cartItemWithItems.Select(u => u.Item1).ToList());
+
+                List<ItemVersionDtoModel> itemVersionDto =
+                    _mapper.Map<List<ItemVersionDtoModel>>
+                    (cartItemWithItems.Select(u => u.Item2).ToList());
+
+                List<Tuple<CartItemsDtoModel, ItemVersionDtoModel>> cartItemWithItemsDto =
+                    (from l in cartItemDto
+                     join r in itemVersionDto
+                     on l.ProductCode equals r.Id
+                     select new Tuple<CartItemsDtoModel, ItemVersionDtoModel>(l, r)).ToList();
+                return cartItemWithItemsDto;
             }
         }
+        public void RemoveCartItem(int userID, int code, DateTime dateTime)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+
+                CartItem cartItem = uow.Users.GetCartItem(userID, code);
+
+                if (cartItem == null)
+                    throw new ArgumentNullException("Cart item is ambiguous.");
+
+                uow.Users.DeleteCartItem(userID, cartItem);
+
+                uow.Carts.UpdateDate(userID, dateTime);
+
+                uow.Commit();
+
+            }
+        }
+
+        public string GetPassPepper(string username)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                return uow.Users.GetPassPepper(username);
+            }
+        }
+
+        public CartDtoModel GetUserCart(int userId)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                Cart cart = uow.Users.GetUserCart(userId);
+                CartDtoModel cartDto = _mapper.Map<CartDtoModel>(cart);
+                return cartDto;
+            }
+        }
+        public void AddItemToCart(int userId, CartItem cartItem)
+        {
+            using(EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                uow.Users.AddNewCartItem(userId, cartItem);
+            }
+        }
+        public bool CheckIfCartHasItem(int userId,CartItem cartItem)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                return uow.Users.CheckIfCartHasItem(userId, cartItem);
+            }
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using EF_Models;
 
 namespace ES_Repositories
@@ -40,13 +41,39 @@ namespace ES_Repositories
         {
             return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.AsEnumerable(); 
         }
+        public CartItem GetCartItem(int userId,int code) 
+        {
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Where(u => u.ProductCode == code).SingleOrDefault();
+        }
         public int GetCartId(int userId)
         {
             return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().Id;
         }
-        public Item AddItemToCart(int userId, Item item)
+
+        public string GetPassPepper(string username)
         {
-            //Skontat kako sta 
+            return _dbSet.FirstOrDefault(u => u.Username == username).Salt;
+        }
+
+        public Cart GetUserCart(int userId)
+        {
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault();
+        }
+
+        public void DeleteCartItem(int userId,CartItem cartItem)
+        {
+            //var sda = _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Where(u => u.ProductCode == itemCode).SingleOrDefault();
+            _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Remove(cartItem);
+        }
+
+        public void AddNewCartItem(int userId, CartItem cartItem)
+        {
+            //var sda = _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Where(u => u.ProductCode == itemCode).SingleOrDefault();
+            _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Add(cartItem);
+        }
+        public bool CheckIfCartHasItem(int userId,CartItem cartItem)
+        {
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.Any(u => u.CartItem == cartItem);
         }
         //public bool CheckIfEmailExists( string )
 

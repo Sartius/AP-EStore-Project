@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EF-Models\EF-Models.csproj" />
     <ProjectReference Include="..\ES-Repositories\ES-Repositories.csproj" />
   </ItemGroup>

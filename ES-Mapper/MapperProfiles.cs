@@ -14,6 +14,8 @@ namespace ES_Mapper
             //CreateMap<UserDtoModel, User>().ReverseMap();
 
             CreateMap<Cart, CartDtoModel>().ReverseMap();
+            CreateMap<Cart, Order>().ReverseMap();
+            CreateMap<CartItem, OrderItem>().ReverseMap();
 
             CreateMap<Order, OrderDtoModel>().ReverseMap();
 

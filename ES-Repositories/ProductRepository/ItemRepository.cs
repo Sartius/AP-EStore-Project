@@ -28,18 +28,27 @@ namespace ES_Repositories.ProductRepository
             //return _dbSet.Where(u => u.Code == codes && u.IsActive == true);
             return _dbSet.Where(u => codes.Contains(u.Id));
         }
-        public List<ItemVersion> GetItemsBySearch(int category, int sortBy, int filter, string searchName, int page)
+        public List<ItemVersion> GetItemsBySearch(int category, int sortBy, int filter, string searchName)
         {
-            List<ItemVersion> sh;
-            if (category != 0) 
+            IEnumerable<ItemVersion> sh = _dbSet.Where(u => u.Item.IsActive == true);
+            if (category > 0) 
             {
-                sh = _dbSet.Where(u => u.Item.ItemCategory == category).ToList();
+                sh = sh.Where(u => u.Item.ItemCategory == category);
             }
-            if(sortBy != 0)
+            if(sortBy > 0)
             {
-                sh.GroupBy(u => u.DetailedItem.Single().)
+                //sh = sh.GroupBy(u => u.DetailedItem.Single().) Case:
             }
-            return _dbSet.Where(u => u.Name.Contains(searchName) /*&& u.category == category*/).OrderBy(u => u.Price).ToList(); //figure out how to fix categories and sortby
+            if(filter > 0)
+            {
+                //TODO
+            }
+            if(searchName != null)
+            {
+                sh = sh.Where(u => u.Name.Contains(searchName)); //figure out how to fix categories and sortby
+            }
+
+            return sh.ToList();
             
         }
         public void AddNewItem(ItemVersion item)

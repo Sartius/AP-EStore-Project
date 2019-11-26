@@ -11,5 +11,6 @@ namespace ES_Repositories.OrderRepository
 
         public List<Order> GetAllOrdersByUserId(int userId);
         public List<Tuple<OrderItem, ItemVersion>> GetAllOrderItemsWithItemsByOrderId(int orderId);
+        public void AddOrder(Order order);
     }
 }

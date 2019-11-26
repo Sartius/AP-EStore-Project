@@ -10,7 +10,7 @@ namespace ES_Repositories.ProductRepository
         public ItemVersion GetById(object id);
         public bool CheckIfItemIsActive(int id);
         public IEnumerable<ItemVersion> GetItemsByCodes(IEnumerable<int> codes);
-        public List<ItemVersion> GetItemsBySearch(int category, int sortBy, string searchName);
+        public List<ItemVersion> GetItemsBySearch(int category, int sortBy,int filter, string searchName);
         public void AddNewItem(ItemVersion item);
         public bool DeleteItem(int itemId);
         public bool CheckIfItemExists(int itemId);

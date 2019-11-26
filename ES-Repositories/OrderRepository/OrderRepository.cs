@@ -34,9 +34,9 @@ namespace ES_Repositories.OrderRepository
             return innerFinal;
         }
 
-        public bool AddOrder()
+        public void AddOrder(Order order)
         {
-
+            _dbSet.Add(order);
         }
         //public something list(list) GetOrdersWithItems(userid)
     }

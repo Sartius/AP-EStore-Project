@@ -24,12 +24,13 @@ namespace ES_DAL.OrderManager
         //GetOrdersWithItems
 
 
-        public bool OnCheckout(CartItem cartItem,int itemVersion)
+        public bool OnCheckout(int userId,CartDtoModel cartDto,List<CartItemsDtoModel> cartItemDto)
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
                 UnitOfWork uow = new UnitOfWork(context);
-                
+                var cart = _mapper.Map<Cart>(cartDto);
+                var cartItems = _mapper.Map<List<CartItem>>(cartItemDto);
                 
             }
         }

@@ -15,15 +15,15 @@ namespace ES_DAL.ItemManager
         {
             mapper = _mapper;
         }
-        public List<ItemDtoModel> SearchItems(int category, int sortBy, int filter, string searchName,int page)
+        public List<ItemVersionDtoModel> SearchItems(int category, int sortBy, int filter, string searchName,int page)
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
-                
+                List<ItemVersionDtoModel> items = new List<ItemVersionDtoModel>();
                 UnitOfWork uow = new UnitOfWork(context);
                 //List<ItemVersionDtoModel> items = new List<ItemDtoModel>();
 
-                List<ItemVersion> efUsers = uow.Items.GetItemsBySearch(category, sortBy, searchName);
+                List<ItemVersion> efUsers = uow.Items.GetItemsBySearch(category, sortBy, filter, searchName);
                 if (efUsers is null)
                 {
                     return null;
@@ -32,12 +32,12 @@ namespace ES_DAL.ItemManager
                     
                 foreach (ItemVersion efuser in efUsers)
                 {
-                    items.Add(_mapper.Map<ItemDtoModel>(efuser));
+                    items.Add(_mapper.Map<ItemVersionDtoModel>(efuser));
 
                 }
                 
-
-                return items;
+                //Find How many Items are here and return only a page
+                return items.GetRange(page*100,page+100);
             }
         }
         public int AddNewItem(ItemDtoModel dto_item, ItemDetailDtoModel dto_itemDetail, ItemVersionDtoModel dto_itemVersion) //dodat ItemVersionDtoModel

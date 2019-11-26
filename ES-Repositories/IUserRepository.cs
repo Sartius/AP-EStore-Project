@@ -17,7 +17,7 @@ namespace ES_Repositories
         public Cart GetUserCart(int userId);
         public void DeleteCartItem(int userId, CartItem cartItem);
         public CartItem GetCartItem(int userId, int code);
-        public bool CheckIfCartHasItem(int userId, CartItem cartItem);
+        public bool CheckIfCartHasItem(int userId, int itemCode);
         public void AddNewCartItem(int userId, CartItem cartItem);
     }
 }

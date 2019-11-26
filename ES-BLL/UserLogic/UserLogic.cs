@@ -26,5 +26,9 @@ namespace ES_BLL.UserLogic
             }
             return true;
         }
+        public bool CheckIfItemInCart(int userId,int itemCode)
+        {
+            return _userManager.CheckIfCartHasItem(userId, itemCode);
+        }
     }
 }

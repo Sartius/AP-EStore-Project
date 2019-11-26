@@ -69,5 +69,13 @@ namespace ES_DAL.ItemManager
                 uow.Items.DeleteItem(itemId);
             }
         }
+        public bool CheckIfItemIsActive(int itemId)
+        {
+            using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
+            {
+                UnitOfWork uow = new UnitOfWork(context);
+                return uow.Items.CheckIfItemIsActive(itemId);
+            }
+        }
     }
 }

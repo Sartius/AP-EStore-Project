@@ -159,12 +159,12 @@ namespace ES_DAL
                 uow.Users.AddNewCartItem(userId, cartItem);
             }
         }
-        public bool CheckIfCartHasItem(int userId,CartItem cartItem)
+        public bool CheckIfCartHasItem(int userId,int itemCode)
         {
             using (EF_Models.ESDatabaseContext context = new EF_Models.ESDatabaseContext())
             {
                 UnitOfWork uow = new UnitOfWork(context);
-                return uow.Users.CheckIfCartHasItem(userId, cartItem);
+                return uow.Users.CheckIfCartHasItem(userId, itemCode);
             }
         }
 

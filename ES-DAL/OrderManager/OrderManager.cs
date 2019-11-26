@@ -30,7 +30,7 @@ namespace ES_DAL.OrderManager
             {
                 UnitOfWork uow = new UnitOfWork(context);
                 
-                uow.Orders
+                
             }
         }
     }

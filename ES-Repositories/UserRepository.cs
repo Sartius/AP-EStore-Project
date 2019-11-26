@@ -71,9 +71,9 @@ namespace ES_Repositories
             //var sda = _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Where(u => u.ProductCode == itemCode).SingleOrDefault();
             _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.SingleOrDefault().CartItem.Add(cartItem);
         }
-        public bool CheckIfCartHasItem(int userId,CartItem cartItem)
+        public bool CheckIfCartHasItem(int userId,int itemCode)
         {
-            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.Any(u => u.CartItem == cartItem);
+            return _dbSet.Where(u => u.Id == userId).SingleOrDefault().Cart.Any(u => u.CartItem.SingleOrDefault().ProductCode == itemCode);
         }
         //public bool CheckIfEmailExists( string )
 

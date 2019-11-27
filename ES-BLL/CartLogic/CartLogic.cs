@@ -38,8 +38,9 @@ namespace ES_BLL.CartLogic
                 {
                     return false; //Don't let the user buy an inactive Item or let him but check quantity. Throw a custom exception myb?
                 }
+               
             }
-
+            return true;
         }
 }
 }

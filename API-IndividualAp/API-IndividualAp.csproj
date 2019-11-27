@@ -55,6 +55,18 @@
     <None Remove="ClientApp\src\app\item\file.ts" />
     <None Remove="ClientApp\src\app\item\item.model.ts" />
     <None Remove="ClientApp\src\app\item\item.service.ts" />
+    <None Remove="ClientApp\src\app\Models\CartItem.ts" />
+    <None Remove="ClientApp\src\app\Models\DetailedItem.ts" />
+    <None Remove="ClientApp\src\app\Models\DetailedItems.ts" />
+    <None Remove="ClientApp\src\app\Models\FilterTypes.ts" />
+    <None Remove="ClientApp\src\app\Models\FullItem.ts" />
+    <None Remove="ClientApp\src\app\Models\Item.ts" />
+    <None Remove="ClientApp\src\app\Models\ItemVersion.ts" />
+    <None Remove="ClientApp\src\app\Models\ItemVersions.ts" />
+    <None Remove="ClientApp\src\app\Models\Order.ts" />
+    <None Remove="ClientApp\src\app\Models\OrderItem.ts" />
+    <None Remove="ClientApp\src\app\Models\User.ts" />
+    <None Remove="ClientApp\src\app\Services\UserService.ts" />
     <None Remove="ClientApp\src\app\shared\dropdown.directive.ts" />
   </ItemGroup>
   
@@ -70,6 +82,18 @@
     <TypeScriptCompile Include="ClientApp\src\app\cart\cart.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\item\item.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\item\item.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\CartItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\DetailedItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\DetailedItems.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\FilterTypes.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\FullItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\Item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\ItemVersion.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\ItemVersions.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\Order.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\OrderItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Models\User.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\UserService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\dropdown.directive.ts" />
   </ItemGroup>
 

@@ -52,7 +52,7 @@ namespace ES_Repositories
 
         public string GetPassPepper(string username)
         {
-            return _dbSet.FirstOrDefault(u => u.Username == username).Salt;
+            return _dbSet.FirstOrDefault(u => u.Username == username).Pepper;
         }
 
         public Cart GetUserCart(int userId)

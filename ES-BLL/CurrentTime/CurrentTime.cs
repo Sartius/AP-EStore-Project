@@ -5,7 +5,7 @@ using ES_BLL.Interfaces;
 
 namespace ES_BLL.CurrentTime
 {
-    class CurrentTime : ICurrentTime
+    public class CurrentTime : ICurrentTime
     {
         public DateTime CurrentUTCTime()
         {

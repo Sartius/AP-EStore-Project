@@ -6,7 +6,7 @@ using ES_BLL.Interfaces;
 
 namespace ES_BLL.UserLogic
 {
-    class UserLogic : IUserLogic
+    public class UserLogic : IUserLogic
     {
         private readonly IUserManager _userManager;
         public UserLogic(IUserManager userManager)

@@ -15,7 +15,7 @@ namespace EF_Models
         public string Username { get; set; }
         public string Password { get; set; }
         public int Role { get; set; }
-        public string Salt { get; set; }
+        public string Pepper { get; set; }
 
         public virtual ICollection<Cart> Cart { get; set; }
         public virtual ICollection<Order> Order { get; set; }

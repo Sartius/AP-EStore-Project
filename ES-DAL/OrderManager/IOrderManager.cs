@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ES_DAL.OrderManager
 {
-    interface IOrderManager
+    public interface IOrderManager
     {
     }
 }

@@ -8,7 +8,7 @@ using ES_DTO;
 
 namespace ES_DAL.ItemManager
 {
-    class ItemManager : IItemManager
+    public class ItemManager : IItemManager
     {
         IMapper _mapper;
         public ItemManager(IMapper mapper)

@@ -11,6 +11,13 @@ using AutoMapper;
 using ES_Mapper;
 using ES_DTO;
 using ES_DAL;
+using ES_DAL.ItemManager;
+using ES_DAL.OrderManager;
+using ES_BLL.Interfaces;
+using ES_BLL.UserLogic;
+using ES_BLL.CartLogic;
+using ES_BLL.Encription;
+using ES_BLL.CurrentTime;
 
 
 namespace API_IndividualAp
@@ -30,6 +37,12 @@ namespace API_IndividualAp
             //services.AddDbContext<DBContext>(opt => opt.UseSqlServer(Configuration["Data:ESalesAPIConnection:ConnectionString"]));
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IItemManager, ItemManager>();
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<IUserLogic, UserLogic>();
+            services.AddScoped<ICartLogic, CartLogic>();
+            services.AddScoped<IEncription, Encription>();
+            services.AddScoped<ICurrentTime, CurrentTime>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

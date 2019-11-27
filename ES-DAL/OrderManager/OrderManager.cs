@@ -9,7 +9,7 @@ using ES_DTO;
 namespace ES_DAL.OrderManager
 {
 
-    class OrderManager : IOrderManager
+    public class OrderManager : IOrderManager
     {
         private IMapper _mapper;
 
@@ -31,6 +31,11 @@ namespace ES_DAL.OrderManager
                 UnitOfWork uow = new UnitOfWork(context);
                 var cart = _mapper.Map<Cart>(cartDto);
                 var cartItems = _mapper.Map<List<CartItem>>(cartItemDto);
+                if (cartItems != null)
+                {
+                    return true;
+                }
+                return false;
                 
             }
         }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from '../Services/UserService';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {FormGroup,FormControl,EmailValidator} from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+    public username = '';
+    public password = '';
+    public inputCheck = 1;
 
-  ngOnInit() {
-  }
+  constructor(private route:Router,private loginRegistrationService: UserService) { }
+    tryLogin() {
+        console.log('AtTryLogin');
+        console.log(this.username, this.password);
+        this.loginRegistrationService.usernameLogin = this.username;
+        this.loginRegistrationService.passwordLogin = this.password;
+        this.loginRegistrationService.LogUserIn().then(l => { this.checkIfUserLoggedIn(); }).then(e => { this.inputCheck = this.loginRegistrationService.user.id; });
+    }
+    checkIfUserLoggedIn() {
+        if (this.loginRegistrationService.successfulLoginRegistration === true) {
+            console.log('CheckIfUserLoggedIn?');
+            this.route.navigate(['/']);
+        }
+    }
+    ngOnInit() {
 
+    }
 }

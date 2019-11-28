@@ -55,7 +55,7 @@ namespace API_IndividualAp.Controllers
             //{
             //    return BadRequest(ex.Message);
             //}
-            return Ok(user);
+            return Ok(user.Id);
         }
 
         [HttpPost]
@@ -102,7 +102,7 @@ namespace API_IndividualAp.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
             return Ok(cartContent);
         }

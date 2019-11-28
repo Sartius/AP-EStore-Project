@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProductHistoryComponent } from './product-history/product-history.component';
 import { ManageItemsComponent } from './item/manage-items/manage-items.component';
+import { UserService } from './Services/UserService';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { ManageItemsComponent } from './item/manage-items/manage-items.component
       { path: 'product-history', component: ProductHistoryComponent },
     ])
   ],
-  providers: [],
+    providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
